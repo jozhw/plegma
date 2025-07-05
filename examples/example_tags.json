@@ -1,0 +1,14 @@
+[
+  {
+    "tag_name": "work",
+    "description": "Work-related files and documents"
+  },
+  {
+    "tag_name": "personal",
+    "description": "Personal files and documents"
+  },
+  {
+    "tag_name": "research",
+    "description": "Research papers and academic content"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "signature": "john-smith-marketing",
+    "is_person": true,
+    "is_entity": false,
+    "description": "Signature for John Smith from marketing"
+  },
+  {
+    "signature": "acme-corp-client",
+    "is_person": false,
+    "is_entity": true,
+    "description": "Signature for Acme Corporation client files"
+  }
+]

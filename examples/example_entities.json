@@ -1,0 +1,12 @@
+[
+  {
+    "entity_name": "Acme Corporation",
+    "preferred_name": "Acme Corp",
+    "description": "Main client company"
+  },
+  {
+    "entity_name": "University of Chicago",
+    "preferred_name": "UChicago",
+    "description": "Academic institution"
+  }
+]
