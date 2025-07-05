@@ -176,3 +176,8 @@ Clone this repo, then
     python plegma.py import signature my_signatures.json
 
 ```
+
+## Notes on Tagging for files
+
+Too many tags would render the tagging system useless. I suggest keeping a tagging system that is simple, yet effective in partitioning ideas (this is dependent on the user). Theoretically, one could argue that "everything" is related. However, that defeats the entire point of a tagging system. Hence, before adding a tag to a file, argue for and against its conclusion. If that tag is remotely related, then it would be best to not include it.
+
