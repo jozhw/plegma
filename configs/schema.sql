@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS persons (
        date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
        last_added DATETIME DEFAULT CURRENT_TIMESTAMP,
        update_history TEXT, -- will be a list of datetime
+
        UNIQUE (first_name, last_name, middle_name, date_of_birth)
 );
 
@@ -55,13 +56,14 @@ CREATE TABLE IF NOT EXISTS addresses (
        apartment TEXT,
        current_occupants TEXT, -- will be a list of either entity ids or person ids
        past_occupants TEXT,
-       longitude TEXT NOT NULL,
-       latitude TEXT NOT NULL,
+       longitude TEXT NOT NULL, -- 6 decimals
+       latitude TEXT NOT NULL, -- 6 decimals
        description TEXT,
        date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
        last_added DATETIME DEFAULT CURRENT_TIMESTAMP,
        update_history TEXT, -- will be a list of datetime
-       UNIQUE (longitude, latitude)
+
+       UNIQUE (longitude, latitude, apartment) -- added apartment just in case if same location but diff apartments
 );
 
 -- emails; first two elements of id are em; 
