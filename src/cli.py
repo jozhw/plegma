@@ -1,7 +1,7 @@
 import json
 import argparse
 
-from .db_manager import DBManager
+from db_manager import DBManager
 
 import typing as tp
 
@@ -18,12 +18,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     add_parser.add_argument(
@@ -39,12 +39,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     update_parser.add_argument("id", help="Entry ID to update")
@@ -58,12 +58,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     search_parser.add_argument("pattern", help="Regex pattern to search for")
@@ -75,12 +75,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
+            "persons",
+            "entities",
+            "signatures",
             "address",
-            "email",
-            "phone_number",
+            "emails",
+            "phone_numbers",
         ],
     )
     get_parser.add_argument("id", help="Entry ID")
@@ -91,12 +91,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     list_parser.add_argument("--limit", type=int, help="Limit number of results")
@@ -107,12 +107,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     delete_parser.add_argument("id", help="Entry ID to delete")
@@ -126,12 +126,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     import_parser.add_argument("file", help="JSON file to import")
@@ -142,12 +142,12 @@ def create_cli():
         "table",
         choices=[
             "tags",
-            "person",
-            "entity",
-            "signature",
-            "address",
-            "email",
-            "phone_number",
+            "persons",
+            "entities",
+            "signatures",
+            "addresses",
+            "emails",
+            "phone_numbers",
         ],
     )
     export_parser.add_argument("file", help="Output JSON file")
@@ -162,22 +162,27 @@ def interactive_add(db: DBManager, table_name: str) -> tp.Dict[str, tp.Any]:
     # Define required fields for each table
     required_fields = {
         "tags": ["tag_name"],
-        "person": ["first_name", "last_name"],
-        "entity": ["entity_name"],
-        "signature": ["signature"],
-        "address": ["longitude", "latitude"],
-        "email": ["email_address", "owner"],
-        "phone_number": ["phone_number", "owner"],
+        "persons": ["first_name", "last_name"],
+        "entities": ["entity_name"],
+        "signatures": ["signature"],
+        "addresses": ["longitude", "latitude"],
+        "emails": ["email_address", "owner"],
+        "phone_numbers": ["phone_number", "owner"],
     }
 
     optional_fields = {
         "tags": ["description"],
-        "person": ["middle_name", "preferred_name", "description"],
-        "entity": ["preferred_name", "description"],
-        "signature": ["is_person", "is_entity", "description"],
-        "address": ["apartment", "current_occupants", "past_occupants", "description"],
-        "email": ["email_type", "is_active", "description"],
-        "phone_number": [
+        "persons": ["middle_name", "preferred_name", "description"],
+        "entities": ["preferred_name", "description"],
+        "signatures": ["is_person", "is_entity", "description"],
+        "addresses": [
+            "apartment",
+            "current_occupants",
+            "past_occupants",
+            "description",
+        ],
+        "emails": ["email_type", "is_active", "description"],
+        "phone_numbers": [
             "country_code",
             "phone_number_type",
             "owner_history",

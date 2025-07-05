@@ -6,16 +6,13 @@ Run this script with cron to automatically backup your database.
 
 import os
 import sys
-import time
-import shutil
-import glob
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 # Add the directory containing the main script to the path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from .db_manager import DBManager, DBConfig
+from db_manager import DBManager, DBConfig
 
 
 class BackupScheduler:
@@ -95,7 +92,7 @@ class BackupScheduler:
 def main():
     import argparse
 
-    from .plegma import DB_PATH, BACKUP_PATH, SCHEMA_PATH, PREFIX_PATH
+    from plegma import DB_PATH, BACKUP_PATH, SCHEMA_PATH, PREFIX_PATH
 
     config = DBConfig(DB_PATH, BACKUP_PATH, SCHEMA_PATH, PREFIX_PATH)
 

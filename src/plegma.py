@@ -6,15 +6,15 @@ import json
 from pathlib import Path
 
 
-from .cli import create_cli, interactive_add, format_output
-from .db_manager import DBManager, DBConfig
+from cli import create_cli, interactive_add, format_output
+from db_manager import DBManager, DBConfig
 
 CWD = os.getcwd()
 
 DB_PATH = str(Path(CWD, "db", "database.sqlite"))
-BACKUP_PATH = str(Path(CWD, "db", "backups" "database.sqlite"))
-SCHEMA_PATH = str(Path(CWD, "config", "schema.sql"))
-PREFIX_PATH = str(Path(CWD, "config", "prefixes.json"))
+BACKUP_PATH = str(Path(CWD, "db", "backups"))
+SCHEMA_PATH = str(Path(CWD, "configs", "schema.sql"))
+PREFIX_PATH = str(Path(CWD, "configs", "prefixes.json"))
 
 
 def main():
@@ -34,18 +34,41 @@ def main():
         if args.command == "add":
             if args.interactive:
                 data = interactive_add(db, args.table)
+                entry_id = db.add_entry(args.table, data)
+                print(f"Added entry with ID: {entry_id}")
             elif args.json:
                 if os.path.isfile(args.json):
                     with open(args.json, "r") as f:
                         data = json.load(f)
                 else:
                     data = json.loads(args.json)
+
+                # Handle both single dict and list of dicts
+                if isinstance(data, dict):
+                    data = [data]  # Wrap single dict in a list
+                elif not isinstance(data, list):
+                    print(
+                        "Error: JSON data must be a dictionary or list of dictionaries"
+                    )
+                    return
+
+                entry_ids = []
+                for entry in data:
+                    try:
+                        entry_id = db.add_entry(args.table, entry)
+                        entry_ids.append(entry_id)
+                    except Exception as e:
+                        print(f"Error adding entry: {e}")
+                        continue
+                if entry_ids:
+                    print(
+                        f"Added {len(entry_ids)} entries with IDs: {', '.join(entry_ids)}"
+                    )
+                else:
+                    print("No entries added")
             else:
                 print("Error: Either --json or --interactive must be specified")
                 return
-
-            entry_id = db.add_entry(args.table, data)
-            print(f"Added entry with ID: {entry_id}")
 
         elif args.command == "update":
             if args.json:
