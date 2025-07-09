@@ -1,3 +1,6 @@
 __pycache__
 
 initial_tables
+
+# remove personal db
+/db
