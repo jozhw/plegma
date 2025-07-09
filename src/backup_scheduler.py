@@ -32,7 +32,7 @@ class BackupScheduler:
 
     def cleanup_old_backups(self):
         """Remove old backups, keeping only the most recent ones."""
-        backup_files = list(self.backup_dir.glob("personal_db_backup_*.sqlite"))
+        backup_files = list(self.backup_dir.glob("db_backup_*.sqlite"))
         backup_files.sort(key=lambda x: x.stat().st_mtime, reverse=True)
 
         # Remove old backups
@@ -73,7 +73,7 @@ class BackupScheduler:
 
     def get_backup_status(self):
         """Get information about recent backups."""
-        backup_files = list(self.backup_dir.glob("personal_db_backup_*.sqlite"))
+        backup_files = list(self.backup_dir.glob("db_backup_*.sqlite"))
         backup_files.sort(key=lambda x: x.stat().st_mtime, reverse=True)
 
         print(f"Total backups: {len(backup_files)}")
@@ -102,9 +102,7 @@ def main():
     parser.add_argument(
         "--max-backups", type=int, default=30, help="Maximum number of backups to keep"
     )
-    parser.add_argument(
-        "--db-path", default="personal_db.sqlite", help="Database file path"
-    )
+    parser.add_argument("--db-path", default="db.sqlite", help="Database file path")
 
     args = parser.parse_args()
 
